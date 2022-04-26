@@ -21,17 +21,16 @@
  */
 
 void main() {
-  var result = race(['run', 'run', 'jump', 'run'], '__|_X');
+  var result = race(['run', 'jump', 'jump', 'run'], '__|_X');
   print(result);
 }
 
 Map<bool, String> race(List<String> actions, String obstacle) {
-  var newActions = actions.asMap().values.where((element) =>
-      element.toLowerCase() == 'jump' || element.toLowerCase() == 'run');
+  //Sanatiza las props
+  var newActions = actionsSanatizer(actions);
+  var sanatizeString = stringSanatizer(obstacle);
 
-  var sanatizedString = stringSanatizer(obstacle);
-
-  if (newActions.length == 0 || (sanatizedString.length != newActions.length)) {
+  if (newActions.length == 0 || (sanatizeString.length != newActions.length)) {
     return {false: 'invalid parameters or race and obstacle missmach.'};
   } else {
     return receResult(actions, obstacle);
@@ -53,6 +52,17 @@ String stringSanatizer(String obstacleRace) {
   }
 
   return newObstacle.join().replaceAll(' ', '').trim();
+}
+
+/**
+ * Sanatiza las acciones para limpiarlas de cualquier palabra/accion no valida.
+ */
+
+actionsSanatizer(List<String> actions) {
+  var res = actions.asMap().values.where((element) =>
+      element.toLowerCase() == 'jump' || element.toLowerCase() == 'run');
+
+  return res;
 }
 
 /**
