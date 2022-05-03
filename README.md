@@ -5,4 +5,4 @@ por el momento en PHP y Dart. Quizas en un futuro Javascript (para refrescar con
 Asi como para armar un portadolio de habilidades.
 
 # Retos realizados
-* Ongoing...
+- Reto 17 (Dart solamente.)
